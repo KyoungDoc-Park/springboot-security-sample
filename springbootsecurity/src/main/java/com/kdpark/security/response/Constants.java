@@ -1,7 +1,7 @@
 /**
  * 
  * Constant 
- * GEPP application 에서 사용하는 상수들을 정의한다
+ * application 에서 사용하는 상수들을 정의한다
  * 
  * @author kyoungduck.park@kt.com
  * @since 2018. 03. 15

@@ -70,7 +70,7 @@ public class URLController {
 		logger.info("/loginError ");
 		
 		if( session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION").getClass() == DisabledException.class) {
-			model.addAttribute("message", "You are not allowed\n please contact GEPP's Aministrator");
+			model.addAttribute("message", "You are not allowed\n please contact Aministrator");
 		}else if(session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION").getClass() == BadCredentialsException.class) {
 			model.addAttribute("message", "Please check your ID or Password.");
 		}else {

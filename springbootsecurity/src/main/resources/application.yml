@@ -40,7 +40,7 @@ spring:
 # Cypher key (common) over 16 chracters
 # ----------------------------------------
 cypher: 
-     key: testkeygepp937nx9@!!--
+     key: testkeyzz43s937nx9@!!--
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor

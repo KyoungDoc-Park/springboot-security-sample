@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 		
 	@Autowired private UserAuthenticationService userDetailsService;	
-	@Autowired private GeppAccessDeniedHandler accessDeniedHandler;
+	@Autowired private MyAccessDeniedHandler accessDeniedHandler;
 	@Autowired private PasswordEncoder passwordEncoder;
 	
 	private String[] permitAllUrl = new String[]{"/img/**","/css/**","/js/**","/webjars/**","/login/**","/mobile/**","/telco/**","/appdata/**"}; 

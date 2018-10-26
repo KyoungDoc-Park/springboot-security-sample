@@ -3,15 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
-<mapper namespace="com.kt.ft.gepp.mapper.UserMapper">
+<mapper namespace="com.kdpark.security.mapper.UserMapper">
 
-	<resultMap type="com.kt.ft.gepp.vo.GeppUserVO" id="GeppUserCypherVO">
-        <result column="userId" property="userId" typeHandler="com.kt.ft.gepp.util.typeHandler.EmailCipherTypeHandler" />        
+	<resultMap type="com.kdpark.security.vo.UsersVO" id="MyUserCypherVO">
+        <result column="userId" property="userId" typeHandler="com.kdpark.security.util.typeHandler.EmailCipherTypeHandler" />        
     </resultMap>  
 
 
  	<!-- Login 시 select member  -->
- 	<select id="selectUser" parameterType="String" resultMap="GeppUserCypherVO" >
+ 	<select id="selectUser" parameterType="String" resultMap="MyUserCypherVO" >
  		SELECT m.user_seq as "userSeq",
 			   m.user_nm as "userNm",
 			   m.user_id as "userId",
@@ -25,11 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 FROM users m, user_auth ma, auth au
 		WHERE m.user_seq = ma.user_seq
   		  AND ma.auth_cd = au.auth_cd
-  		  AND m.user_id = #{userId, typeHandler=com.kt.ft.gepp.util.typeHandler.EmailCipherTypeHandler}  		  
+  		  AND m.user_id = #{userId, typeHandler=com.kdpark.security.util.typeHandler.EmailCipherTypeHandler}  		  
  	</select>
  	
  	<!-- Login 시 select member's auth  -->
- 	<select id="selectUserAuth" parameterType="String" resultType="com.kt.ft.gepp.vo.UserAuthVO" >
+ 	<select id="selectUserAuth" parameterType="String" resultType="com.kdpark.security.vo.UserAuthVO" >
 	 	SELECT m.menu_id as menuId,
 	 	       m.menu_nm as menuNm, 
 	 	       m.menu_lv as menuLv, 

@@ -3,7 +3,7 @@
  * mybatis 에서 사용하는 typehandler
  * 해당 컬럼 조회하거나 입력시 암호화 한다
  * 
- * 컬럼마다 상속받아 사용하며 GeppBackOfficeApplication클래스의 sessionFactory.setTypeHandlers 에 입력한다
+ * 컬럼마다 상속받아 사용하며 Application클래스의 sessionFactory.setTypeHandlers 에 입력한다
  */
 package com.kdpark.security.util.typeHandler;
 
