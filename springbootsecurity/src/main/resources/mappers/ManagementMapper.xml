@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.kdpark.security.mapper.ManagementMapper">
+
+	<resultMap type="com.kdpark.security.vo.UsersVO" id="UserCypherVO">
+        <result column="userId" property="userId" typeHandler="com.kdpark.security.util.typeHandler.EmailCipherTypeHandler" />        
+    </resultMap>  
+
+ 
+ 	<!-- 비밀번호 조회 -->
+ 	<select id="selectUserPassword" parameterType="com.kdpark.security.vo.UsersVO" resultType="com.kdpark.security.vo.UsersVO">
+ 		SELECT password
+ 		  FROM users
+ 		 WHERE user_seq = #{userSeq}
+ 		   and use_yn = 'Y' 		   
+ 	</select>
+ 	
+ 	<!-- 비밀번호 변경  -->
+ 	<update id="updateUserPassword" parameterType="com.kdpark.security.vo.UsersVO" >
+ 		UPDATE users
+ 		   SET password= #{password},
+ 		       modify_id = #{userSeq},
+ 		       mod_dt = now()
+ 		 WHERE user_seq = #{userSeq} 		   
+ 	</update>
+ 	
+ 	<!-- 모든 사용자 불러오기 -->
+ 	<select id="loadUsers" parameterType="com.kdpark.security.vo.PagingVO" resultMap="UserCypherVO">
+		SELECT u.user_seq as userSeq,
+				   u.user_id as userId, 
+			       u.user_nm as userNm,              
+			       ai.area_nm as countryNm,
+			       t.telco_nm as telcoNm,
+			       to_char(u.insert_dt, 'YYYY-MM-DD HH24:mm') joinDate,
+			       case when u.use_yn = 'Y' then 'Approval' 
+			            when u.use_yn = 'W' then 'Waiting'
+			            else 'Disapproval' 
+			            end state,
+			       ma.auth_nm as authNm 
+			  FROM users u 
+			       JOIN (user_auth ua join auth au on ua.auth_cd = au.auth_cd ) ma on u.user_seq = ma.user_seq       
+			       LEFT OUTER JOIN area_info ai on u.country_cd = ai.area_cd
+			       LEFT OUTER JOIN telco t on u.telco_cd = t.telco_cd
+			  ORDER BY userId
+		LIMIT #{rowPerPage} OFFSET (#{pageNumber} -1) * #{rowPerPage} 
+	</select>
+	
+
+	
+	<!-- 권한 코드/명 리스트 불러오기 -->
+	<select id="selectAuth" resultType="com.kdpark.security.vo.UserAuthVO">
+		SELECT auth_nm as authNm,
+		       auth_cd as authCd
+		  FROM auth
+		 where use_yn='Y'
+	</select>
+	
+	<!-- 사용자 key 값 조회 -->
+	<select id="selectUserKey" resultType="String">
+		SELECT 'U'||LPAD(cast (nextval('seq_user') as text),9,'0')
+	</select>
+	
+	<!-- 사용자 추가 -->
+	<insert id="addUser" parameterType="com.kdpark.security.vo.UsersVO">
+		INSERT INTO users
+		(
+			user_seq,
+			user_id,
+			user_nm,
+			password,
+			api_key,
+			use_yn,
+			insert_dt,
+			mod_dt,
+			insert_id,
+			modify_id  
+		)		  
+		VALUES(
+			#{userSeq},
+			#{userId, typeHandler=com.kdpark.security.util.typeHandler.EmailCipherTypeHandler},
+			#{userNm},
+			#{password},
+			#{apiKey},
+			'W',		
+			now(),
+			null,
+			#{insertId},
+			''    
+		)			
+	</insert>
+	
+	<!-- 사용자 권한 추가 -->
+	<insert id="addUserAuth"  parameterType="com.kdpark.security.vo.PagingVO">
+		INSERT INTO USER_AUTH
+		(
+			auth_cd,
+			user_seq,
+			use_yn,
+			insert_dt,
+			mod_dt,
+			insert_id,
+			modify_id			
+		)
+		VALUES(
+			#{authCd},
+			#{userSeq},
+			'Y',
+			now(),
+			null,
+			#{insertId},
+			''     
+		)
+	</insert>
+
+
+</mapper>

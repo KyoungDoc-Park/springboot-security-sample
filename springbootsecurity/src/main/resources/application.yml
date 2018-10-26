@@ -1,0 +1,46 @@
+# ----------------------------------------------------------------------------------------------------------------------------------------------- #
+# | Spring Boot DOC                      | http://docs.spring.io/spring-boot/docs/current/reference/html/index.html                             | #
+# | Spring Boot Property DOC             | http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html     | #
+# | Monitoring and management over HTTP  | http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-monitoring.html       | #
+# ----------------------------------------------------------------------------------------------------------------------------------------------- #
+
+spring.profiles.active:
+  - local
+  
+  
+---
+# ----------------------------------------
+# Development setting
+# ----------------------------------------
+spring.profiles: local
+server.port: 8080
+server:
+  servlet:
+    context-path: /
+spring.datasource: 
+       driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+       url: jdbc:log4jdbc:postgresql://ip:port/dbname
+       username: ENC(username_encrypted)
+       password: ENC(password_encrypted)
+logging.config: classpath:logback.xml
+
+---
+
+# ----------------------------------------
+# Thymleaf (common)
+# ----------------------------------------
+spring: 
+    thymeleaf:
+       cache: false
+       enabled: true
+       mode: HTML5
+       prefix: classpath:/templates/
+       suffix: .html
+# ----------------------------------------
+# Cypher key (common) over 16 chracters
+# ----------------------------------------
+cypher: 
+     key: testkeygepp937nx9@!!--
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor

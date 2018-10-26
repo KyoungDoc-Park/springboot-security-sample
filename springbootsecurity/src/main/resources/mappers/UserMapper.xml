@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.kt.ft.gepp.mapper.UserMapper">
+
+	<resultMap type="com.kt.ft.gepp.vo.GeppUserVO" id="GeppUserCypherVO">
+        <result column="userId" property="userId" typeHandler="com.kt.ft.gepp.util.typeHandler.EmailCipherTypeHandler" />        
+    </resultMap>  
+
+
+ 	<!-- Login 시 select member  -->
+ 	<select id="selectUser" parameterType="String" resultMap="GeppUserCypherVO" >
+ 		SELECT m.user_seq as "userSeq",
+			   m.user_nm as "userNm",
+			   m.user_id as "userId",
+			   m.telco_cd as "telcoCd",			   
+			   m.password,
+			   m.country_cd as "countryCd",
+			   m.api_key as "apiKey",
+			   m.use_yn as "useYn",
+		       ma.auth_cd as "authCd", 
+               au.auth_nm as "authNm"
+		 FROM users m, user_auth ma, auth au
+		WHERE m.user_seq = ma.user_seq
+  		  AND ma.auth_cd = au.auth_cd
+  		  AND m.user_id = #{userId, typeHandler=com.kt.ft.gepp.util.typeHandler.EmailCipherTypeHandler}  		  
+ 	</select>
+ 	
+ 	<!-- Login 시 select member's auth  -->
+ 	<select id="selectUserAuth" parameterType="String" resultType="com.kt.ft.gepp.vo.UserAuthVO" >
+	 	SELECT m.menu_id as menuId,
+	 	       m.menu_nm as menuNm, 
+	 	       m.menu_lv as menuLv, 
+	 	       m.up_menu_id as upMenuId, 
+	 	       m.menu_url as menuUrl
+		  FROM menu m, menu_auth ma
+		 WHERE m.menu_id = ma.menu_id
+		   AND ma.auth_cd = #{auth}
+		   AND ma.use_yn ='Y'
+		   AND m.use_yn ='Y'
+ 	</select>
+</mapper>

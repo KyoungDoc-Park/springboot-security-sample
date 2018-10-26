@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>GEPP Management Service</title>
+	<link href="css/common.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	html { overflow: hidden; }
+	html, body { width: 100%; height: 100%; margin: 0; padding: 0;}
+	.wrapper{ width: 100%; height: 100%; position: absolute; overflow-y:scroll; }
+	</style>	
+	<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>	
+</head>
+
+<body class="login_body">
+
+<div class="wrapper">
+<!-- start : 상단영역 -->
+<div class="top_warp_login">
+  <div class="top_area">
+        <div class="logo_area"><a href="login.html"><img src="img/logo.png" /></a></div>        
+        <!-- start : 메인메뉴영역 -->
+        <div class="main_menu_area">
+			<div class="main_menu">
+              <ul>
+                <li><a href="#">Infected area</a></li>
+                <li><a href="#">Service area</a></li>
+                <li><a href="#">Registration</a></li>
+                <li><a href="#">Management</a></li>
+              </ul>       
+            </div>
+        </div>  
+        <!-- end : 메인메뉴영역 -->        
+    </div>
+</div>
+<!-- end : 상단영역 -->
+
+<!-- start : login입력영역 -->
+<div class="login_bg">
+	<div class="login_box01">
+      <div class="login_area01">
+      	<form th:action="@{/login}" method="post">
+            <div class="login_txt01">ID</div>
+            <input name="username" type="text" class="login_input01" />
+            <div class="login_space01">
+            <div class="login_txt02">Password</div>
+            <input name="password" type="password" class="login_input01" />
+            </div>
+            <div class="login_space02"><input type="submit" class="button_04" value="LOGIN"/></div>
+         </form>
+        </div>
+    </div>
+</div>
+ <!-- <div th:if="${param.error}">
+            <script>alert("Please check your ID or Password")</script>
+        </div> -->
+<!-- end : login입력영역 -->
+</div>
+
+<!-- start : copyright영역 -->
+<div class="cpr_area cpr_fixed">
+    <span class="cpr_txt01">Copyright ⓒ 2018 GEEP Management Service All Right Reserved.</span>
+    <span class="cpr_txt02"><span class="cpr_txt03">Mail To Webmaster</span></span>
+</div>
+<!-- end : copyright영역 -->
+
+</body>
+</html>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+    var message = /*[[${message}]]*/ 'default';
+    if(message!=null){
+    	alert(message);	
+    }
+    
+
+/*]]>*/
+</script>
