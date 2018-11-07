@@ -65,12 +65,6 @@
 		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 		    <version>1.16</version>
 		</dependency>    		
-		
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-		</dependency>
-		
 	
 		
 		 <!-- using in DEV  (and need spring.thymeleaf.cache to false) -->

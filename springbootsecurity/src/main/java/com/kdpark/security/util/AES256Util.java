@@ -3,7 +3,7 @@
  * AES256Util
  * aes256 방식으로 양방향 encoding, decoding 을 수행하는 메소드르 제공한다
  * 
- * @author kyoungduck.park@kt.com
+ * @author kyoungduck.park
  * @since 2018. 03. 15
  * @version 1.0
  * @see

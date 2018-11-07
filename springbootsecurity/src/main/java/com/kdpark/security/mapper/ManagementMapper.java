@@ -4,7 +4,7 @@
  * classpath:/mappers/ManagementMapper.xml 에 해당하는 SQL 수행 역할
  * (sqlSessionTemplate을 직접 사용하지 않고 추상메소드 만 정의하여 사용함)
  * 
- * @author kyoungduck.park@kt.com
+ * @author kyoungduck.park
  * @since 2018. 03. 15
  * @version 1.0
  * @see

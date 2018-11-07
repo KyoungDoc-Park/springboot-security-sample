@@ -2,7 +2,7 @@
  * 
  * 화면 이동 controller
  * 
- * @author kyoungduck.park@kt.com
+ * @author kyoungduck.park
  * @since 2018. 03. 15
  * @version 1.0
  * @see

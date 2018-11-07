@@ -4,7 +4,7 @@
  * UI와 서버단 간의 주가 받는 데이터 형식
  * HashMap에 key, value형태로 통신한다
  * 
- * @author kyoungduck.park@kt.com
+ * @author kyoungduck.park
  * @since 2018. 03. 15
  * @version 1.0
  * @see

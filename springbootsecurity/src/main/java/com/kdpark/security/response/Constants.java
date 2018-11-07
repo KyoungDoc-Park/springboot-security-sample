@@ -3,7 +3,7 @@
  * Constant 
  * application 에서 사용하는 상수들을 정의한다
  * 
- * @author kyoungduck.park@kt.com
+ * @author kyoungduck.park
  * @since 2018. 03. 15
  * @version 1.0
  * @see
