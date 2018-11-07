@@ -13,3 +13,8 @@ spring boot + security
  - mybatis
  - thymeleaf
  - postgres
+
+## Data
+ 1. db_script/create_db.sql 실행
+ 2. data insert
+ 
